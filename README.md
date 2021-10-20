@@ -8,11 +8,11 @@ This app can your URLs shortener and you can manage your URLs shortener.
 
 ## Technologies
 
-Node.js / NestJS
-MongoDB
-EJS Template Engine
-Bootstrap 5
-jQuery
+Node.js / NestJS<br />
+MongoDB<br />
+EJS Template Engine<br />
+Bootstrap 5<br />
+jQuery<br />
 
 ## Installation
 
