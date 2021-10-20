@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+  </head>
+  <body></body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+
+    <div class="container">
+      <div class="card mt-5 mb-5 w-50 m-auto">
+        <div class="card-header">Register</div>
+        <div class="card-body mt-3">
+          <div
+            class="alert alert-danger d-none text-center"
+            id="alertmsg"
+            role="alert"
+          ></div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text col-6 col-md-4 col-lg-3"
+              id="basic-addon3"
+              >First Name</span
+            >
+            <input
+              type="text"
+              class="form-control col-6 col-md-8 col-lg-9"
+              aria-describedby="basic-addon3"
+              name="firstName"
+              id="firstName"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text col-6 col-md-4 col-lg-3"
+              id="basic-addon3 "
+              >Last Name</span
+            >
+            <input
+              type="text"
+              class="form-control col-6 col-md-8 col-lg-9"
+              aria-describedby="basic-addon3"
+              name="lastName"
+              id="lastName"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text col-6 col-md-4 col-lg-3"
+              id="basic-addon3 "
+              >Email</span
+            >
+            <input
+              type="email"
+              class="form-control col-6 col-md-8 col-lg-9"
+              aria-describedby="basic-addon3"
+              name="email"
+              id="email"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text col-6 col-md-4 col-lg-3"
+              id=" basic-addon3 "
+              >Username</span
+            >
+            <input
+              type="text"
+              class="form-control col-6 col-md-8 col-lg-9"
+              aria-describedby="basic-addon3"
+              name="username"
+              id="username"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text col-6 col-md-4 col-lg-3"
+              id="basic-addon3 "
+              >Password</span
+            >
+            <input
+              type="password"
+              class="form-control col-6 col-md-8 col-lg-9"
+              aria-describedby="basic-addon3"
+              name="password"
+              id="password"
+            />
+          </div>
+          <div class="input-group mb-4">
+            <span
+              class="input-group-text col-6 col-md-4 col-lg-3"
+              id=" basic-addon3"
+              >Confirm Password</span
+            >
+            <input
+              type="password"
+              class="form-control col-6 col-md-8 col-lg-9"
+              aria-describedby="basic-addon3"
+              id="confirm_password"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <a class="m-auto" href="/auth/login "
+              >Do you have an account with us?</a
+            >
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="submit"
+              class="btn btn-success m-auto"
+              id="submit"
+              onclick="Validate()"
+              value="Register"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('../partials/scripts') %>
+    <script src="/javascripts/auth/register.js"></script>
+  </body>
+</html>

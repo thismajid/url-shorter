@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password</title>
+  </head>
+  <body></body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+
+    <div class="container">
+      <div class="card mt-5 mb-5 w-50 m-auto">
+        <div class="card-header">Forget Password</div>
+        <div class="card-body mt-3">
+          <div
+            class="alert alert-danger d-none text-center"
+            id="alertmsg"
+            role="alert"
+          ></div>
+          <form>
+            <input type="text" class="d-none" value="<%= token %>" id="token" />
+            <input type="text" class="d-none" value="<%= email %>" id="email" />
+            <div class="input-group mb-3">
+              <span
+                class="input-group-text col-6 col-md-4 col-lg-3"
+                id="basic-addon3"
+                >Password</span
+              >
+              <input
+                type="password"
+                class="form-control col-6 col-md-8 col-lg-9"
+                aria-describedby="basic-addon3"
+                name="password"
+                id="password"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span
+                class="input-group-text col-6 col-md-4 col-lg-3"
+                id="basic-addon3"
+                >Confirm Password</span
+              >
+              <input
+                type="password"
+                class="form-control col-6 col-md-8 col-lg-9"
+                aria-describedby="basic-addon3"
+                id="confirm_password"
+              />
+            </div>
+          </form>
+          <div class="input-group mb-3">
+            <div class="m-auto">
+              <button
+                class="btn btn-success mt-3 ms-2"
+                id="submit"
+                onclick="resetPassword()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('../partials/scripts') %>
+    <script src="/javascripts/auth/reset.js"></script>
+  </body>
+</html>

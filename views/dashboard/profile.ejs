@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+          <%- include('../partials/dashboard-menu.ejs') %>
+        </div>
+        <div class="col-sm p-3 min-vh-100">
+          <div class="container rounded col-6 mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-10 border-right m-auto">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+                        <div class="row mt-2">
+                            <input type="text" class="d-none" value="<%= user.id %>" id="userID">
+                            <input type="text" class="d-none" value="<%= user.firstName %>" id="previousFirstName">
+                            <input type="text" class="d-none" value="<%= user.lastName %>" id="previousLastName">
+                            <div class="col-md-6"><label class="labels" for="firstName">First Name: </label><input type="text" class="form-control" value="<%= user.firstName %>" id="firstName"></div>
+                            <div class="col-md-6"><label class="labels" for="lastName">Last Name: </label><input type="text" class="form-control" value="<%= user.lastName %>" id="lastName"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12 mb-3"><label class="labels" for="email">Email: </label><input type="text" class="form-control" value="<%= user.email %>" id="email" readonly></div>
+                            <div class="col-md-12"><label class="labels" for="username">Username: </label><input type="text" class="form-control" value="<%= user.username %>" id="username" readonly></div>
+                        </div>
+                        <div class="mt-5 text-center"><a href="/dashboard/profile/reset" class="btn btn-outline-dark profile-button me-3">Reset Password</a><button class="btn btn-primary profile-button" type="button" id="saveProfile">Save Profile</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <%- include("../partials/scripts") %>
+
+    <script src="/javascripts/dashboard/main.js"></script>
+    <script src="/javascripts/dashboard/changeProfile.js"></script>
+  </body>
+</html>

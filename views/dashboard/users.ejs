@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+          <%- include('../partials/dashboard-menu.ejs') %>
+        </div>
+        <% const { search } = query %>
+        <div class="col-sm p-3 min-vh-100">
+          <!-- content -->
+          <div class="col-8 m-auto">
+            <form action="/dashboard/users" method="get">
+              <div class="input-group rounded mb-3 mt-5">
+                <input
+                  type="search"
+                  name="search"
+                  class="form-control rounded"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="search-addon"
+                />
+                <span
+                  class="input-group-text border-0 ms-1"
+                  id="search-addon"
+                  style="background-color: #eee !important"
+                >
+                  <i class="fas fa-search"></i>
+                </span>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <% if(order === 'asc') { %> #
+                      <a
+                        class="order-a"
+                        href="/dashboard/users?search=<%= search %>&page=<%= current %>&order=desc"
+                        ><i class="fas fa-sort order-icon"></i
+                      ></a>
+                      <% } else { %> #
+                      <a
+                        class="order-a"
+                        href="/dashboard/users?search=<%= search %>&page=<%= current %>&order=asc"
+                        ><i class="fas fa-sort order-icon"></i
+                      ></a>
+                      <% } %>
+                    </th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Register Date</th>
+                    <th scope="col">Operations</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let index = 0; index < users.length; index++) { %>
+                  <tr>
+                    <th scope="row"><%= (10 * current - 10)+ index+1 %></th>
+                    <td><%= users[index].firstName %></td>
+                    <td><%= users[index].lastName %></td>
+                    <td><%= users[index].username %></td>
+                    <td><%= users[index].email %></td>
+                    <td><%= users[index].role %></td>
+                    <td>
+                      <%= users[index].createdAt.toLocaleDateString('en-GB') %>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger btn-sm button-delete"
+                        id="delete-<%= users[index]._id %>"
+                      >
+                        <i
+                          class="fas fa-times"
+                          id="delete2-<%= users[index]._id %>"
+                        ></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary text-light btn-sm button-role"
+                        id="role-<%= users[index]._id %>"
+                      >
+                        <i
+                          class="fas fa-user-cog"
+                          id="role2-<%= users[index]._id %>"
+                        ></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% if(Number(totalPages) > 1) { %>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-5">
+              <% if (current == 1) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                  >First</a
+                >
+              </li>
+              <% } else { %>
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  href="/dashboard/users?search=<%= search %>&page=1"
+                  tabindex="-1"
+                  aria-disabled="true"
+                  >First</a
+                >
+              </li>
+              <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1)
+              %> <% if (i !== 1) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">...</a>
+              </li>
+              <% } %> <% for (; i <= (Number(current) + 4) && i <= totalPages;
+              i++) { %> <% if (i == current) { %>
+              <li class="page-item active">
+                <a class="page-link" href="#"><%= i %></a>
+              </li>
+              <% } else { %>
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  href="/dashboard/users?search=<%= search %>&page=<%= i %>"
+                  ><%= i %></a
+                >
+              </li>
+              <% } %> <% if (i == Number(current) + 4 && i < totalPages) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">...</a>
+              </li>
+              <% } %> <% } %> <% if (current == totalPages) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">Last</a>
+              </li>
+              <% } else { %>
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  href="/dashboard/users?search=<%= search %>&page=<%= totalPages %>"
+                  >Last</a
+                >
+              </li>
+              <% } %>
+            </ul>
+          </nav>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <%- include("../partials/scripts") %>
+    <script src="/javascripts/dashboard/main.js"></script>
+    <script src="/javascripts/dashboard/changeRole.js"></script>
+    <script src="/javascripts/dashboard/deleteUser.js"></script>
+  </body>
+</html>

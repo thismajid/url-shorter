@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/link-page.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="pie degree m-auto timer">
+      <span class="block"></span>
+      <span id="time">0</span>
+    </div>
+
+    <div class="col-md-12 text-center mt-5 mb-3">
+      <a class="btn btn-secondary disabled" id="link" href="<%= link %>"
+        >GO TO</a
+      >
+    </div>
+    <p class="d-none" id="linkAddress"><%= link %></p>
+
+    <%- include('partials/social-networks') %> <%- include('partials/scripts')
+    %>
+
+    <script src="/javascripts/index/links.js"></script>
+  </body>
+</html>

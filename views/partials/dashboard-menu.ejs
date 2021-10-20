@@ -1,0 +1,86 @@
+<div
+  class="
+    d-flex
+    flex-sm-column flex-row flex-nowrap
+    bg-light
+    align-items-center
+    sticky-top
+  "
+>
+  <ul
+    class="
+      nav nav-pills nav-flush
+      flex-sm-column flex-row flex-nowrap
+      mb-auto
+      mx-auto
+      text-center
+      justify-content-between
+      w-100
+      px-3
+      align-items-center
+    "
+  >
+    <li>
+      <a
+        href="/"
+        class="d-block p-3 link-dark text-decoration-none"
+        title=""
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        data-bs-original-title="Icon-only"
+      >
+        <i class="bi-house-fill fs-1 text-dark"></i>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/dashboard/main"
+        class="d-block p-3 link-dark text-decoration-none"
+        title=""
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        data-bs-original-title="Icon-only"
+      >
+        <i class="bi-link fs-1" id="mainIcon"></i>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/dashboard/profile"
+        class="d-block p-3 link-dark text-decoration-none"
+        title=""
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        data-bs-original-title="Dashboard"
+      >
+        <i class="bi-person-square fs-1" id="profileIcon"></i>
+      </a>
+    </li>
+    <% if(user.role === 'admin' || user.role === 'superadmin') { %>
+    <li>
+      <a
+        href="/dashboard/users"
+        class="d-block p-3 link-dark text-decoration-none"
+        title=""
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        data-bs-original-title="Customers"
+      >
+        <i class="bi-people fs-1" id="usersIcon"></i>
+      </a>
+    </li>
+    <% } %>
+    <li>
+      <a
+        href="/auth/logout"
+        class="d-block p-3 text-decoration-none text-muted"
+        title=""
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        data-bs-original-title="Customers"
+      >
+        <i class="bi-box-arrow-left fs-2"></i>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <% if(authNavbar) { %>
+    <div
+      class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"
+    >
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/auth/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/auth/login">Login</a>
+        </li>
+      </ul>
+    </div>
+    <% } else { %>
+    <div
+      class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"
+    >
+      <a
+        href="/auth/logout"
+        class="nav-link text-danger"
+        title=""
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        data-bs-original-title="Customers"
+      >
+        <i class="bi-box-arrow-left fs-4"></i>
+      </a>
+    </div>
+    <% } %>
+    <div class="mx-auto order-0">
+      <a class="navbar-brand mx-auto" href="/">URL Shorter</a>
+    </div>
+    <% if(!authNavbar) { %>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/dashboard/main"
+            >Welcome <%= firstName %></a
+          >
+        </li>
+      </ul>
+    </div>
+    <% } else { %>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"></div>
+    <% } %>
+  </div>
+</nav>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+          <%- include('../partials/dashboard-menu.ejs') %>
+        </div>
+        <% const { search } = query %>
+        <div class="col-sm p-3 min-vh-100">
+          <!-- content -->
+          <div class="col-8 m-auto">
+            <form action="/dashboard/main" method="get">
+              <div class="input-group rounded mb-3 mt-5">
+                <input
+                  type="search"
+                  name="search"
+                  class="form-control rounded"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="search-addon"
+                />
+                <span
+                  class="input-group-text border-0 ms-1"
+                  id="search-addon"
+                  style="background-color: #eee !important"
+                >
+                  <i class="fas fa-search"></i>
+                </span>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <% if(order === 'asc') { %> #
+                      <a
+                        class="order-a"
+                        href="/dashboard/main?search=<%= search %>&page=<%= current %>&order=desc"
+                        ><i class="fas fa-sort order-icon"></i
+                      ></a>
+                      <% } else { %> #
+                      <a
+                        class="order-a"
+                        href="/dashboard/main?search=<%= search %>&page=<%= current %>&order=asc"
+                        ><i class="fas fa-sort order-icon"></i
+                      ></a>
+                      <% } %>
+                    </th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Create Date</th>
+                    <th scope="col">Operations</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let index = 0; index < links.length; index++) { %>
+                  <tr>
+                    <th scope="row"><%= (10 * current - 10)+ index+1 %></th>
+                    <td><%= links[index].link %></td>
+                    <td>
+                      <a href="/<%= links[index].name %>"
+                        ><%= links[index].name %></a
+                      >
+                    </td>
+                    <td>
+                      <%= links[index].createdAt.toLocaleDateString('en-GB') %>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger btn-sm button-delete"
+                        id="delete-<%= links[index]._id %>"
+                      >
+                        <i
+                          class="fas fa-times"
+                          id="delete-<%= links[index]._id %>"
+                        ></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary text-light btn-sm button-edit"
+                        id="edit-<%= links[index]._id %>"
+                      >
+                        <i
+                          class="fas fa-edit"
+                          id="edit2-<%= links[index]._id %>"
+                        ></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% if(totalPages > 1) { %>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-5">
+              <% if (current == 1) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                  >First</a
+                >
+              </li>
+              <% } else { %>
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  href="/dashboard/main?search=<%= search %>&page=1"
+                  tabindex="-1"
+                  aria-disabled="true"
+                  >First</a
+                >
+              </li>
+              <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1)
+              %> <% if (i !== 1) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">...</a>
+              </li>
+              <% } %> <% for (; i <= (Number(current) + 4) && i <= totalPages;
+              i++) { %> <% if (i == current) { %>
+              <li class="page-item active">
+                <a class="page-link" href="#"><%= i %></a>
+              </li>
+              <% } else { %>
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  href="/dashboard/main?search=<%= search %>&page=<%= i %>"
+                  ><%= i %></a
+                >
+              </li>
+              <% } %> <% if (i == Number(current) + 4 && i < totalPages) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">...</a>
+              </li>
+              <% } %> <% } %> <% if (current == totalPages) { %>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">Last</a>
+              </li>
+              <% } else { %>
+              <li class="page-item">
+                <a
+                  class="page-link"
+                  href="/dashboard/main?search=<%= search %>&page=<%= totalPages %>"
+                  >Last</a
+                >
+              </li>
+              <% } %>
+            </ul>
+          </nav>
+
+          <% } %>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="editModal"
+            tabindex="-1"
+            aria-labelledby="editModal"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Edit Your Link
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="saveChanges"
+                    onclick="changeUrl()"
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include("../partials/scripts") %>
+
+    <script src="/javascripts/dashboard/main.js"></script>
+    <script src="/javascripts/dashboard/changeUrl.js"></script>
+    <script src="/javascripts/dashboard/deleteUrl.js"></script>
+  </body>
+</html>
