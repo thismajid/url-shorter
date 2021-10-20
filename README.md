@@ -4,7 +4,15 @@
 
 ## URL Shorter
 
-This app can your URLs shortener and you can manage your URLs shortener
+This app can your URLs shortener and you can manage your URLs shortener.
+
+## Technologies
+
+Node.js / NestJS
+MongoDB
+EJS Template Engine
+Bootstrap 5
+jQuery
 
 ## Installation
 
@@ -32,5 +40,3 @@ $ npm run start:prod
 - Telegram - [Telegram](https://t.me/thismajid)
 - Whatsapp - [Whatsapp](https://wa.me/989375066139)
 - Instagram - [Instagram](https://www.instagram.com/this.majid)
-
-## License
